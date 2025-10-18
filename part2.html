@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekram Developer Ltd | Architectural Excellence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            color: #0a0a0a;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #4A5F7F 0%, #2C3E56 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #4A5F7F;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            transition: bottom 0.4s ease;
+            z-index: 2;
+        }
+        
+        .project-card:hover .project-overlay {
+            bottom: 0;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e5e5e5;
+        }
+        
+        .service-card:hover {
+            background: #4A5F7F;
+            color: white;
+            border-color: #4A5F7F;
+            transform: translateY(-5px);
+        }
+        
+        .service-card:hover .service-icon {
+            color: white;
+        }
+        
+        .testimonial-card {
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #2C3E56 0%, #1a2332 100%);
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #4A5F7F;
+            box-shadow: 0 0 0 3px rgba(74, 95, 127, 0.1);
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="fixed w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-[#4A5F7F] to-[#2C3E56] rounded"></div>
+                <span class="text-2xl font-bold gradient-text">Ekram Developer Ltd</span>
+            </div>
+            
+            <nav class="hidden lg:flex items-center space-x-10 text-sm font-medium">
+                <a href="#home" class="nav-link hover:text-[#4A5F7F]">Home</a>
+                <a href="#about" class="nav-link hover:text-[#4A5F7F]">About</a>
+                <a href="#projects" class="nav-link hover:text-[#4A5F7F]">Projects</a>
+                <a href="#services" class="nav-link hover:text-[#4A5F7F]">Services</a>
+                <a href="#team" class="nav-link hover:text-[#4A5F7F]">Team</a>
+                <a href="#testimonials" class="nav-link hover:text-[#4A5F7F]">Testimonials</a>
+                <a href="#contact" class="bg-[#4A5F7F] text-white px-6 py-2 rounded-full hover:bg-[#2C3E56] transition">Contact</a>
+            </nav>
+            
+            <button class="lg:hidden text-2xl" onclick="toggleMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-full h-full bg-white z-40 lg:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+            <button class="absolute top-6 right-6 text-3xl" onclick="toggleMenu()">×</button>
+            <a href="#home" onclick="toggleMenu()" class="hover:text-[#4A5F7F]">Home</a>
+            <a href="#about" onclick="toggleMenu()" class="hover:text-[#4A5F7F]">About</a>
+            <a href="#projects" onclick="toggleMenu()" class="hover:text-[#4A5F7F]">Projects</a>
+            <a href="#services" onclick="toggleMenu()" class="hover:text-[#4A5F7F]">Services</a>
+            <a href="#team" onclick="toggleMenu()" class="hover:text-[#4A5F7F]">Team</a>
+            <a href="#testimonials" onclick="toggleMenu()" class="hover:text-[#4A5F7F]">Testimonials</a>
+            <a href="#contact" onclick="toggleMenu()" class="bg-[#4A5F7F] text-white px-8 py-3 rounded-full">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center parallax-section" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=80');">
+        <div class="text-center text-white px-6 max-w-5xl animate-fade-in">
+            <p class="text-sm uppercase tracking-widest mb-4 opacity-90">Building Tomorrow's Legacy Today</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">Architectural Excellence<br/>Meets Innovation</h1>
+            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light opacity-90">
+                Crafting premium residential and commercial spaces that redefine luxury living across Bangladesh
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="bg-[#4A5F7F] px-8 py-4 rounded-full hover:bg-[#2C3E56] transition font-medium">Explore Projects</a>
+                <a href="#contact" class="border-2 border-white px-8 py-4 rounded-full hover:bg-white hover:text-[#2C3E56] transition font-medium">Schedule Consultation</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="30" height="50" viewBox="0 0 30 50">
+                <rect x="5" y="5" width="20" height="35" rx="10" fill="none" stroke="white" stroke-width="2"/>
+                <circle cx="15" cy="15" r="3" fill="white"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="stat-number gradient-text">15+</div>
+                    <p class="text-gray-600 mt-2 font-light">Years Experience</p>
+                </div>
+                <div>
+                    <div class="stat-number gradient-text">50+</div>
+                    <p class="text-gray-600 mt-2 font-light">Projects Delivered</p>
+                </div>
+                <div>
+                    <div class="stat-number gradient-text">2M+</div>
+                    <p class="text-gray-600 mt-2 font-light">Sq Ft Built</p>
+                </div>
+                <div>
+                    <div class="stat-number gradient-text">98%</div>
+                    <p class="text-gray-600 mt-2 font-light">Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">About Ekram Developer Ltd</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Creating Spaces That Inspire & Endure</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Founded in 2010, Ekram Developer Ltd has established itself as a premier construction and real estate development company in Bangladesh. We specialize in creating architecturally distinguished residential and commercial properties that seamlessly blend contemporary design with functional excellence.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Our commitment to sustainability, structural integrity, and aesthetic sophistication has made us the preferred choice for discerning clients seeking premium developments across Dhaka and beyond.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="border-l-4 border-[#4A5F7F] pl-4">
+                            <h4 class="font-semibold text-lg mb-1">Our Vision</h4>
+                            <p class="text-sm text-gray-600">To be Bangladesh's most trusted name in premium real estate development</p>
+                        </div>
+                        <div class="border-l-4 border-[#4A5F7F] pl-4">
+                            <h4 class="font-semibold text-lg mb-1">Our Mission</h4>
+                            <p class="text-sm text-gray-600">Delivering exceptional quality through innovation and craftsmanship</p>
+                        </div>
+                    </div>
+                    <a href="#contact" class="inline-block bg-[#4A5F7F] text-white px-8 py-3 rounded-full hover:bg-[#2C3E56] transition">Partner With Us</a>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" class="rounded-2xl shadow-2xl w-full" alt="Modern Building">
+                    <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl hidden md:block">
+                        <p class="text-3xl font-bold gradient-text">ISO 9001</p>
+                        <p class="text-sm text-gray-600 mt-1">Certified Quality</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">Our Portfolio</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Explore our collection of landmark developments that showcase our commitment to architectural excellence</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Project 1 -->
+                <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Skyline Residence">
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Skyline Residence</h3>
+                        <p class="text-sm mb-3 opacity-90">Uttara, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">16-story luxury residential complex with 64 premium apartments, rooftop amenities, and smart home integration</p>
+                        <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Residential</span>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
+                    <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Harmony Tower">
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Harmony Tower</h3>
+                        <p class="text-sm mb-3 opacity-90">Gulshan, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">A 22-story mixed-use development featuring premium office spaces and executive residences</p>
+                        <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Mixed-Use</span>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
+                    <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Crescent Plaza">
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Crescent Plaza</h3>
+                        <p class="text-sm mb-3 opacity-90">Chattogram</p>
+                        <p class="text-sm mb-4 opacity-90">Modern commercial hub with 120,000 sq ft of retail and office space</p>
+                        <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Commercial</span>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Heritage Gardens">
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Heritage Gardens</h3>
+                        <p class="text-sm mb-3 opacity-90">Banani, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">Exclusive gated community with 28 villas featuring private gardens and club facilities</p>
+                        <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Residential</span>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
+                    <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Quantum Tech Park">
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Quantum Tech Park</h3>
+                        <p class="text-sm mb-3 opacity-90">Gazipur</p>
+                        <p class="text-sm mb-4 opacity-90">State-of-the-art IT park with Grade A office spaces and modern infrastructure</p>
+                        <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Commercial</span>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Azure Heights">
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Azure Heights</h3>
+                        <p class="text-sm mb-3 opacity-90">Dhanmondi, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">Boutique residential tower with 32 ultra-luxury apartments and concierge services</p>
+                        <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Residential</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#contact" class="inline-block border-2 border-[#4A5F7F] text-[#4A5F7F] px-8 py-3 rounded-full hover:bg-[#4A5F7F] hover:text-white transition">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">What We Offer</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Comprehensive Services</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">End-to-end solutions for all your real estate and construction needs</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white p-8 rounded-2xl">
+                    <div class="service-icon text-4xl mb-4 text-[#4A5F7F]">🏗️</div>
+                    <h3 class="text-xl font-bold mb-3">Design & Build</h3>
+                    <p class="text-gray-600 mb-4">Complete turnkey solutions from architectural design to final construction, ensuring seamless project execution.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Architectural Planning</li>
+                        <li>• Structural Engineering</li>
+                        <li>• Construction Management</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white p-8 rounded-2xl">
+                    <div class="service-icon text-4xl mb-4 text-[#4A5F7F]">📊</div>
+                    <h3 class="text-xl font-bold mb-3">Project Management</h3>
+                    <p class="text-gray-600 mb-4">Professional oversight ensuring timely delivery, quality control, and budget optimization throughout the project lifecycle.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Timeline Management</li>
+                        <li>• Quality Assurance</li>
+                        <li>• Budget Control</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white p-8 rounded-2xl">
+                    <div class="service-icon text-4xl mb-4 text-[#4A5F7F]">🎨</div>
+                    <h3 class="text-xl font-bold mb-3">Interior Development</h3>
+                    <p class="text-gray-600 mb-4">Sophisticated interior design and execution that reflects your vision with contemporary elegance and functionality.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Space Planning</li>
+                        <li>• Material Selection</li>
+                        <li>• Furniture & Fixtures</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-white p-8 rounded-2xl">
+                    <div class="service-icon text-4xl mb-4 text-[#4A5F7F]">🔧</div>
+                    <h3 class="text-xl font-bold mb-3">Renovation & Retrofit</h3>
+                    <p class="text-gray-600 mb-4">Transforming existing structures with modern upgrades while preserving architectural integrity and enhancing value.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Structure Assessment</li>
+                        <li>• Modernization</li>
+                        <li>• System Upgrades</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-white p-8 rounded-2xl">
+                    <div class="service-icon text-4xl mb-4 text-[#4A5F7F]">🌱</div>
+                    <h3 class="text-xl font-bold mb-3">Sustainable Solutions</h3>
+                    <p class="text-gray-600 mb-4">Environmentally responsible construction practices incorporating green building technologies and energy efficiency.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Green Building Design</li>
+                        <li>• Energy Management</li>
+                        <li>• Sustainable Materials</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-white p-8 rounded-2xl">
+                    <div class="service-icon text-4xl mb-4 text-[#4A5F7F]">🏢</div>
+                    <h3 class="text-xl font-bold mb-3">Property Development</h3>
+                    <p class="text-gray-600 mb-4">Strategic real estate development from land acquisition to project completion, maximizing investment returns.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Market Analysis</li>
+                        <li>• Financial Planning</li>
+                        <li>• Sales & Marketing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">How We Work</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Process</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A systematic approach ensuring excellence at every stage</p>
+            </div>
+            
+            <div class="relative">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <!-- Step 1 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-[#4A5F7F] to-[#2C3E56] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">1</div>
+                        <h3 class="text-xl font-bold mb-3">Consultation</h3>
+                        <p class="text-gray-600 text-sm">Understanding your vision, requirements, and project objectives through detailed discussions</p>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-[#4A5F7F] to-[#2C3E56] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">2</div>
+                        <h3 class="text-xl font-bold mb-3">Design & Planning</h3>
+                        <p class="text-gray-600 text-sm">Creating comprehensive designs, obtaining approvals, and developing detailed project timelines</p>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-[#4A5F7F] to-[#2C3E56] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">3</div>
+                        <h3 class="text-xl font-bold mb-3">Construction</h3>
+                        <p class="text-gray-600 text-sm">Executing with precision using quality materials, skilled craftsmen, and rigorous quality control</p>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-[#4A5F7F] to-[#2C3E56] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">4</div>
+                        <h3 class="text-xl font-bold mb-3">Handover</h3>
+                        <p class="text-gray-600 text-sm">Final inspections, documentation, and seamless project delivery with ongoing support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">Meet Our Team</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Leadership Excellence</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our experienced leadership team brings decades of expertise in construction and real estate development</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Managing Director -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#4A5F7F] to-[#2C3E56] h-80 mb-6 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border-4 border-white/30">
+                                <svg class="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-1">Abdur Razzak Dhali</h3>
+                        <p class="text-[#4A5F7F] font-medium mb-2">Managing Director</p>
+                        <p class="text-gray-600 text-sm mb-4">Leading strategic vision and operational excellence with over 15 years of industry experience</p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="tel:+8801715400951" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#4A5F7F] hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                </svg>
+                            </a>
+                            <a href="mailto:abdurrazzakdhali2@gmail.com" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#4A5F7F] hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Director 1 -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#5A6F8F] to-[#3C4E66] h-80 mb-6 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border-4 border-white/30">
+                                <svg class="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-1">Md. Shamim Al Mamun</h3>
+                        <p class="text-[#4A5F7F] font-medium mb-2">Director - Operations</p>
+                        <p class="text-gray-600 text-sm mb-4">Overseeing project execution and quality assurance across all developments</p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="tel:+8801707700562" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#4A5F7F] hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                </svg>
+                            </a>
+                            <a href="mailto:h.m.sahamimahmad4390@gmail.com" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#4A5F7F] hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Director 2 -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#6A7F9F] to-[#4C5E76] h-80 mb-6 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border-4 border-white/30">
+                                <svg class="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-1">A. K. M. Farhan Doza</h3>
+                        <p class="text-[#4A5F7F] font-medium mb-2">Director - Finance</p>
+                        <p class="text-gray-600 text-sm mb-4">Managing financial strategy and investment planning for sustainable growth</p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="tel:+8801681712312" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#4A5F7F] hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                </svg>
+                            </a>
+                            <a href="mailto:farhandoza818@gmail.com" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#4A5F7F] hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Director 3 -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#7A8FAF] to-[#5C6E86] h-80 mb-6 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <div class="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border-4 border-white/30">
+                                <svg class="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-1">Md. Mahfuzor Rahman</h3>
+                        <p class="text-[#4A5F7F] font-medium mb-2">Director - Business Development</p>
+                        <p class="text-gray-600 text-sm mb-4">Driving strategic partnerships and expanding our market presence</p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="tel:+8801866686668" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#4A5F7F] hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                </svg>
+                            </a>
+                            <a href="mailto:mahfuz220221@gmail.com" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#4A5F7F] hover:text-white transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">Client Stories</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">What Our Clients Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Trusted by hundreds of satisfied clients across Bangladesh</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-gray-50 p-8 rounded-2xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-[#4A5F7F] rounded-full flex items-center justify-center text-white font-bold mr-4">MR</div>
+                        <div>
+                            <h4 class="font-bold">Mohammed Rahman</h4>
+                            <p class="text-sm text-gray-500">CEO, Rahman Industries</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-500 mb-3">★★★★★</div>
+                    <p class="text-gray-600 italic">"Ekram Developer Ltd transformed our vision into reality with their Harmony Tower project. Their attention to detail and commitment to quality is unmatched. Highly recommended for premium developments."</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-gray-50 p-8 rounded-2xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-[#4A5F7F] rounded-full flex items-center justify-center text-white font-bold mr-4">SA</div>
+                        <div>
+                            <h4 class="font-bold">Sadia Ahmed</h4>
+                            <p class="text-sm text-gray-500">Homeowner, Skyline Residence</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-500 mb-3">★★★★★</div>
+                    <p class="text-gray-600 italic">"Moving into my apartment at Skyline Residence has been a dream come true. The craftsmanship, modern amenities, and thoughtful design exceeded all expectations."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-gray-50 p-8 rounded-2xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-[#4A5F7F] rounded-full flex items-center justify-center text-white font-bold mr-4">KH</div>
+                        <div>
+                            <h4 class="font-bold">Kamal Hossain</h4>
+                            <p class="text-sm text-gray-500">Director, Tech Solutions Ltd</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-500 mb-3">★★★★★</div>
+                    <p class="text-gray-600 italic">"The Quantum Tech Park project was delivered on time and within budget. Ekram Developer Ltd's professionalism and expertise made the entire process smooth and stress-free."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+     <!-- Why Choose Us Section -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">Why Ekram Developer Ltd</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Setting New Standards in Construction Excellence</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-[#4A5F7F]/10 rounded-lg flex items-center justify-center text-[#4A5F7F] text-xl font-bold mr-4 flex-shrink-0">✓</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Premium Quality Materials</h4>
+                                <p class="text-gray-600 text-sm">We source only the finest materials from trusted suppliers, ensuring longevity and aesthetic appeal in every project.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-[#4A5F7F]/10 rounded-lg flex items-center justify-center text-[#4A5F7F] text-xl font-bold mr-4 flex-shrink-0">✓</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Expert Team</h4>
+                                <p class="text-gray-600 text-sm">Our team comprises seasoned architects, engineers, and craftsmen with decades of combined experience.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-[#4A5F7F]/10 rounded-lg flex items-center justify-center text-[#4A5F7F] text-xl font-bold mr-4 flex-shrink-0">✓</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Timely Delivery</h4>
+                                <p class="text-gray-600 text-sm">Rigorous project management ensures we meet deadlines without compromising on quality standards.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-[#4A5F7F]/10 rounded-lg flex items-center justify-center text-[#4A5F7F] text-xl font-bold mr-4 flex-shrink-0">✓</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Transparent Communication</h4>
+                                <p class="text-gray-600 text-sm">Regular updates and open dialogue keep you informed at every stage of your project.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-[#4A5F7F]/10 rounded-lg flex items-center justify-center text-[#4A5F7F] text-xl font-bold mr-4 flex-shrink-0">✓</div>
+                            <div>
+                                <h4 class="font-bold mb-1">After-Sales Support</h4>
+                                <p class="text-gray-600 text-sm">Our commitment doesn't end at handover - we provide comprehensive maintenance and support services.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80" class="rounded-2xl shadow-lg" alt="Construction">
+                        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" class="rounded-2xl shadow-lg mt-8" alt="Architecture">
+                        <img src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=600&q=80" class="rounded-2xl shadow-lg" alt="Interior">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80" class="rounded-2xl shadow-lg mt-8" alt="Building">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-24 text-white parallax-section" style="background-image: linear-gradient(rgba(44, 62, 86, 0.9), rgba(26, 35, 50, 0.9)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Start Your Project?</h2>
+            <p class="text-lg mb-10 opacity-90">Let's discuss how we can bring your vision to life with our expertise and dedication</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="bg-[#4A5F7F] px-8 py-4 rounded-full hover:bg-[#5A6F8F] transition font-medium">Get a Free Consultation</a>
+                <a href="tel:+8801715400951" class="border-2 border-white px-8 py-4 rounded-full hover:bg-white hover:text-[#2C3E56] transition font-medium">Call Us Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Contact Form -->
+                <div>
+                    <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">Get In Touch</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Build Something Extraordinary</h2>
+                    <p class="text-gray-600 mb-8">Share your project details and our team will reach out to schedule a personalized consultation.</p>
+                    
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Full Name *</label>
+                                <input type="text" required class="w-full border border-gray-300 rounded-lg px-4 py-3 transition" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Phone Number *</label>
+                                <input type="tel" required class="w-full border border-gray-300 rounded-lg px-4 py-3 transition" placeholder="+880 1XX-XXXXXXX">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email Address *</label>
+                            <input type="email" required class="w-full border border-gray-300 rounded-lg px-4 py-3 transition" placeholder="john@example.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Project Type *</label>
+                            <select required class="w-full border border-gray-300 rounded-lg px-4 py-3 transition">
+                                <option value="">Select project type</option>
+                                <option value="residential">Residential Development</option>
+                                <option value="commercial">Commercial Development</option>
+                                <option value="renovation">Renovation</option>
+                                <option value="interior">Interior Design</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Project Budget</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-4 py-3 transition">
+                                <option value="">Select budget range</option>
+                                <option value="under-50">Under 50 Lac</option>
+                                <option value="50-100">50 Lac - 1 Crore</option>
+                                <option value="100-250">1 Crore - 2.5 Crore</option>
+                                <option value="250-500">2.5 Crore - 5 Crore</option>
+                                <option value="over-500">Above 5 Crore</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Project Details *</label>
+                            <textarea required rows="4" class="w-full border border-gray-300 rounded-lg px-4 py-3 transition" placeholder="Tell us about your project requirements..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-[#4A5F7F] text-white py-4 rounded-lg hover:bg-[#2C3E56] transition font-medium">Submit Inquiry</button>
+                    </form>
+                </div>
+                
+                <!-- Contact Information -->
+                <div>
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 mb-8">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-[#4A5F7F] rounded-lg flex items-center justify-center text-white mr-4 flex-shrink-0">📍</div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Head Office</h4>
+                                    <p class="text-gray-600 text-sm">56/1 Baitul View (17th Floor)<br>Unite-D, Purana Paltan<br>Dhaka-1000, Bangladesh</p>
+                                </div>
+                            </div>
+                            
+                            <!-- <div class="flex items-start">
+                                <div class="w-12 h-12 bg-[#4A5F7F] rounded-lg flex items-center justify-center text-white mr-4 flex-shrink-0">📞</div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Phone</h4>
+                                    <p class="text-gray-600 text-sm">+880 17154 00951</p>
+                                </div>
+                            </div> -->
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-[#4A5F7F] rounded-lg flex items-center justify-center text-white mr-4 flex-shrink-0">✉️</div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Email</h4>
+                                    <p class="text-gray-600 text-sm">info@ekramdevelopersltd.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-[#4A5F7F] rounded-lg flex items-center justify-center text-white mr-4 flex-shrink-0">🕐</div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Business Hours</h4>
+                                    <p class="text-gray-600 text-sm">Sunday - Thursday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Friday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map -->
+                    <div class="rounded-2xl overflow-hidden shadow-lg h-64 bg-gray-200">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.386847527661!2d90.41163087595424!3d23.73588017866993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8f9558e2c21%3A0x90e23aacb99341d1!2sBaitul%20View!5e0!3m2!1sen!2sbd!4v1234567890" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#2C3E56] text-gray-300 py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-[#4A5F7F] to-[#6A7F9F] rounded"></div>
+                        <span class="text-2xl font-bold text-white">Ekram Developer Ltd</span>
+                    </div>
+                    <p class="text-sm mb-4">Building spaces that endure. Premium construction and real estate development across Bangladesh.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-[#1a2332] rounded-full flex items-center justify-center hover:bg-[#4A5F7F] transition">f</a>
+                        <a href="#" class="w-10 h-10 bg-[#1a2332] rounded-full flex items-center justify-center hover:bg-[#4A5F7F] transition">in</a>
+                        <a href="#" class="w-10 h-10 bg-[#1a2332] rounded-full flex items-center justify-center hover:bg-[#4A5F7F] transition">📷</a>
+                        <a href="#" class="w-10 h-10 bg-[#1a2332] rounded-full flex items-center justify-center hover:bg-[#4A5F7F] transition">▶</a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:text-[#4A5F7F] transition">About Us</a></li>
+                        <li><a href="#projects" class="hover:text-[#4A5F7F] transition">Our Projects</a></li>
+                        <li><a href="#services" class="hover:text-[#4A5F7F] transition">Services</a></li>
+                        <li><a href="#team" class="hover:text-[#4A5F7F] transition">Our Team</a></li>
+                        <li><a href="#contact" class="hover:text-[#4A5F7F] transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Our Services</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-[#4A5F7F] transition">Design & Build</a></li>
+                        <li><a href="#" class="hover:text-[#4A5F7F] transition">Project Management</a></li>
+                        <li><a href="#" class="hover:text-[#4A5F7F] transition">Interior Development</a></li>
+                        <li><a href="#" class="hover:text-[#4A5F7F] transition">Renovation</a></li>
+                        <li><a href="#" class="hover:text-[#4A5F7F] transition">Property Development</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Stay Updated</h4>
+                    <p class="text-sm mb-4">Subscribe to our newsletter for latest projects and updates.</p>
+                    <form class="flex flex-col space-y-2">
+                        <input type="email" placeholder="Your email" class="bg-[#1a2332] border border-[#4A5F7F]/30 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-[#4A5F7F]">
+                        <button type="submit" class="bg-[#4A5F7F] text-white py-2 rounded-lg hover:bg-[#5A6F8F] transition text-sm font-medium">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-[#4A5F7F]/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
+                <p>&copy; 2025 Ekram Developer Ltd. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-[#4A5F7F] transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-[#4A5F7F] transition">Terms of Service</a>
+                    <a href="#" class="hover:text-[#4A5F7F] transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.05)';
+            }
+        });
+    </script>
+
+</body>
+</html>
