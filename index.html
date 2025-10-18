@@ -106,6 +106,75 @@
         .project-card:hover .project-overlay {
             bottom: 0;
         }
+
+           .project-tab-btn {
+        color: #6B7280;
+        background: transparent;
+    }
+    
+    .project-tab-btn.active {
+        background: #4A5F7F;
+        color: white;
+    }
+    
+    .project-category {
+        animation: fadeIn 0.3s ease-out;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .project-card {
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 1;
+    }
+    
+    .project-card:hover::before {
+        opacity: 1;
+    }
+    
+    .project-overlay {
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        right: 0;
+        padding: 2rem;
+        transition: bottom 0.4s ease;
+        z-index: 2;
+    }
+    
+    .project-card:hover .project-overlay {
+        bottom: 0;
+    }
+    
+    .project-img {
+        transition: transform 0.5s ease;
+    }
+    
+    .project-card:hover .project-img {
+        transform: scale(1.05);
+    }
         
         .stat-number {
             font-size: 3.5rem;
@@ -198,7 +267,7 @@
     <header class="fixed w-full z-50 glass-effect">
         <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
             <div class="flex items-center space-x-2">
-                <div class="w-12 h-12 bg-white rounded flex items-center justify-center ">
+                <div class="w-12 h-12 bg-white rounded flex items-center justify-center">
                     <img src="./images/lg.jpg" alt="Ekram Developer Ltd Logo" class="w-full h-full object-contain">
                 </div>
                 <span class="text-2xl font-bold gradient-text">Ekram Developer Ltd</span>
@@ -313,137 +382,255 @@
         </div>
     </section>
 
-      <!-- Projects Section -->
-    <section id="projects" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">Our Portfolio</p>
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Explore our collection of landmark developments that showcase our commitment to architectural excellence</p>
-            </div>
+   <!-- Projects Section -->
+<section id="projects" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <p class="text-[#4A5F7F] uppercase tracking-widest text-sm mb-4 font-medium">Our Portfolio</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Featured Projects</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Discover our portfolio of distinguished developments across Bangladesh</p>
+        </div>
 
-            <!-- Previous Projects -->
-            <div class="mb-20">
-                <div class="flex items-center mb-8">
-                    <div class="flex-grow h-px bg-gray-300"></div>
-                    <h3 class="text-3xl font-bold mx-6 text-[#4A5F7F]">Completed Projects</h3>
-                    <div class="flex-grow h-px bg-gray-300"></div>
-                </div>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project 1 -->
-                    <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
-                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Skyline Residence">
-                        <div class="project-overlay text-white">
-                            <h3 class="text-2xl font-bold mb-2">Skyline Residence</h3>
-                            <p class="text-sm mb-3 opacity-90">Uttara, Dhaka</p>
-                            <p class="text-sm mb-4 opacity-90">16-story luxury residential complex with 64 premium apartments, rooftop amenities, and smart home integration</p>
-                            <div class="flex gap-2">
-                                <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Residential</span>
-                                <span class="inline-block bg-green-500 text-white px-4 py-2 rounded-full text-xs font-medium">Completed</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Project 2 -->
-                    <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
-                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Heritage Gardens">
-                        <div class="project-overlay text-white">
-                            <h3 class="text-2xl font-bold mb-2">Heritage Gardens</h3>
-                            <p class="text-sm mb-3 opacity-90">Banani, Dhaka</p>
-                            <p class="text-sm mb-4 opacity-90">Exclusive gated community with 28 villas featuring private gardens and club facilities</p>
-                            <div class="flex gap-2">
-                                <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Residential</span>
-                                <span class="inline-block bg-green-500 text-white px-4 py-2 rounded-full text-xs font-medium">Completed</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Current Projects -->
-            <div class="mb-20">
-                <div class="flex items-center mb-8">
-                    <div class="flex-grow h-px bg-gray-300"></div>
-                    <h3 class="text-3xl font-bold mx-6 text-[#4A5F7F]">Ongoing Projects</h3>
-                    <div class="flex-grow h-px bg-gray-300"></div>
-                </div>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project 3 -->
-                    <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
-                        <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Harmony Tower">
-                        <div class="project-overlay text-white">
-                            <h3 class="text-2xl font-bold mb-2">Harmony Tower</h3>
-                            <p class="text-sm mb-3 opacity-90">Gulshan, Dhaka</p>
-                            <p class="text-sm mb-4 opacity-90">A 22-story mixed-use development featuring premium office spaces and executive residences</p>
-                            <div class="flex gap-2">
-                                <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Mixed-Use</span>
-                                <span class="inline-block bg-blue-500 text-white px-4 py-2 rounded-full text-xs font-medium">Ongoing</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Project 4 -->
-                    <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
-                        <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Crescent Plaza">
-                        <div class="project-overlay text-white">
-                            <h3 class="text-2xl font-bold mb-2">Crescent Plaza</h3>
-                            <p class="text-sm mb-3 opacity-90">Chattogram</p>
-                            <p class="text-sm mb-4 opacity-90">Modern commercial hub with 120,000 sq ft of retail and office space</p>
-                            <div class="flex gap-2">
-                                <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Commercial</span>
-                                <span class="inline-block bg-blue-500 text-white px-4 py-2 rounded-full text-xs font-medium">Ongoing</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Future Projects -->
-            <div class="mb-12">
-                <div class="flex items-center mb-8">
-                    <div class="flex-grow h-px bg-gray-300"></div>
-                    <h3 class="text-3xl font-bold mx-6 text-[#4A5F7F]">Upcoming Projects</h3>
-                    <div class="flex-grow h-px bg-gray-300"></div>
-                </div>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project 5 -->
-                    <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
-                        <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Quantum Tech Park">
-                        <div class="project-overlay text-white">
-                            <h3 class="text-2xl font-bold mb-2">Quantum Tech Park</h3>
-                            <p class="text-sm mb-3 opacity-90">Gazipur</p>
-                            <p class="text-sm mb-4 opacity-90">State-of-the-art IT park with Grade A office spaces and modern infrastructure</p>
-                            <div class="flex gap-2">
-                                <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Commercial</span>
-                                <span class="inline-block bg-orange-500 text-white px-4 py-2 rounded-full text-xs font-medium">Upcoming</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Project 6 -->
-                    <div class="project-card rounded-2xl overflow-hidden shadow-lg bg-white h-96 relative">
-                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Azure Heights">
-                        <div class="project-overlay text-white">
-                            <h3 class="text-2xl font-bold mb-2">Azure Heights</h3>
-                            <p class="text-sm mb-3 opacity-90">Dhanmondi, Dhaka</p>
-                            <p class="text-sm mb-4 opacity-90">Boutique residential tower with 32 ultra-luxury apartments and concierge services</p>
-                            <div class="flex gap-2">
-                                <span class="inline-block bg-white text-[#4A5F7F] px-4 py-2 rounded-full text-xs font-medium">Residential</span>
-                                <span class="inline-block bg-orange-500 text-white px-4 py-2 rounded-full text-xs font-medium">Upcoming</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center">
-                <a href="#contact" class="inline-block border-2 border-[#4A5F7F] text-[#4A5F7F] px-8 py-3 rounded-full hover:bg-[#4A5F7F] hover:text-white transition">View All Projects</a>
+        <!-- Project Tabs -->
+        <div class="flex justify-center mb-12">
+            <div class="inline-flex bg-gray-100 rounded-full p-1.5 gap-1">
+                <button onclick="showProjects('completed')" id="btn-completed" class="project-tab-btn active px-8 py-3 rounded-full font-medium transition-all duration-300">
+                    Completed
+                </button>
+                <button onclick="showProjects('ongoing')" id="btn-ongoing" class="project-tab-btn px-8 py-3 rounded-full font-medium transition-all duration-300">
+                    Ongoing
+                </button>
+                <button onclick="showProjects('upcoming')" id="btn-upcoming" class="project-tab-btn px-8 py-3 rounded-full font-medium transition-all duration-300">
+                    Upcoming
+                </button>
             </div>
         </div>
-    </section>
+
+        <!-- Completed Projects -->
+        <div id="projects-completed" class="project-category">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Project 1 -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg bg-white">
+                    <div class="absolute top-6 right-6 z-10">
+                        <span class="bg-white/95 backdrop-blur-sm text-[#4A5F7F] px-4 py-2 rounded-lg text-xs font-semibold shadow-md">
+                            Completed 2023
+                        </span>
+                    </div>
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" class="project-img w-full h-full object-cover" alt="Skyline Residence">
+                    </div>
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Ittehad Towers</h3>
+                        <p class="text-sm mb-3 opacity-90">79/D/Ka, Kadamtala 9 No Goli, Bashabo, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">G + 8(9) luxury residential complex with 32 premium apartments, 
+                            rooftop amenities, and smart home integration</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Residential</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">32 Units</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">9 Floors</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg bg-white">
+                    <div class="absolute top-6 right-6 z-10">
+                        <span class="bg-white/95 backdrop-blur-sm text-[#4A5F7F] px-4 py-2 rounded-lg text-xs font-semibold shadow-md">
+                            Completed 2022
+                        </span>
+                    </div>
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" class="project-img w-full h-full object-cover" alt="Heritage Gardens">
+                    </div>
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Hirajheel Towers</h3>
+                                                <p class="text-sm mb-3 opacity-90">79/2/C, Kadamtala 9 No Goli, Bashabo, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">G + 9(10) luxury residential complex with 36 premium apartments, 
+                            rooftop amenities, and smart home integration</p>
+
+                        <div class="flex gap-2 flex-wrap">
+                        <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Residential</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">36 Units</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">10 Floors</span>    
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Project 2 -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg bg-white">
+                    <div class="absolute top-6 right-6 z-10">
+                        <span class="bg-white/95 backdrop-blur-sm text-[#4A5F7F] px-4 py-2 rounded-lg text-xs font-semibold shadow-md">
+                            Completed 2022
+                        </span>
+                    </div>
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" class="project-img w-full h-full object-cover" alt="Heritage Gardens">
+                    </div>
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Hirajheel Towers</h3>
+                                                <p class="text-sm mb-3 opacity-90">79/2/C, Kadamtala 9 No Goli, Bashabo, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">G + 9(10) luxury residential complex with 36 premium apartments, 
+                            rooftop amenities, and smart home integration</p>
+
+                        <div class="flex gap-2 flex-wrap">
+                        <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Residential</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">36 Units</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">10 Floors</span>    
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Project 2 -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg bg-white">
+                    <div class="absolute top-6 right-6 z-10">
+                        <span class="bg-white/95 backdrop-blur-sm text-[#4A5F7F] px-4 py-2 rounded-lg text-xs font-semibold shadow-md">
+                            Completed 2022
+                        </span>
+                    </div>
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" class="project-img w-full h-full object-cover" alt="Heritage Gardens">
+                    </div>
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Hirajheel Towers</h3>
+                                                <p class="text-sm mb-3 opacity-90">79/2/C, Kadamtala 9 No Goli, Bashabo, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">G + 9(10) luxury residential complex with 36 premium apartments, 
+                            rooftop amenities, and smart home integration</p>
+
+                        <div class="flex gap-2 flex-wrap">
+                        <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Residential</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">36 Units</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">10 Floors</span>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ongoing Projects -->
+        <div id="projects-ongoing" class="project-category hidden">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Project 3 -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg bg-white">
+                    <div class="absolute top-6 right-6 z-10">
+                        <span class="bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md">
+                            65% Complete
+                        </span>
+                    </div>
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80" class="project-img w-full h-full object-cover" alt="Harmony Tower">
+                    </div>
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Harmony Tower</h3>
+                        <p class="text-sm mb-3 opacity-90">Gulshan, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">A 22-story mixed-use development featuring premium office spaces and executive residences</p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-xs mb-2">
+                                <span>Construction Progress</span>
+                                <span class="font-semibold">65%</span>
+                            </div>
+                            <div class="w-full bg-white/20 rounded-full h-2">
+                                <div class="bg-white h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Mixed-Use</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">22 Floors</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Est. 2025</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg bg-white">
+                    <div class="absolute top-6 right-6 z-10">
+                        <span class="bg-blue-500 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md">
+                            45% Complete
+                        </span>
+                    </div>
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=800&q=80" class="project-img w-full h-full object-cover" alt="Crescent Plaza">
+                    </div>
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Crescent Plaza</h3>
+                        <p class="text-sm mb-3 opacity-90">Chattogram</p>
+                        <p class="text-sm mb-4 opacity-90">Modern commercial hub with 120,000 sq ft of retail and office space</p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-xs mb-2">
+                                <span>Construction Progress</span>
+                                <span class="font-semibold">45%</span>
+                            </div>
+                            <div class="w-full bg-white/20 rounded-full h-2">
+                                <div class="bg-white h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Commercial</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">120K sq ft</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Est. 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Projects -->
+        <div id="projects-upcoming" class="project-category hidden">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Project 5 -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg bg-white">
+                    <div class="absolute top-6 right-6 z-10">
+                        <span class="bg-orange-500 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md">
+                            Launching 2026
+                        </span>
+                    </div>
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=800&q=80" class="project-img w-full h-full object-cover" alt="Quantum Tech Park">
+                    </div>
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Quantum Tech Park</h3>
+                        <p class="text-sm mb-3 opacity-90">Gazipur</p>
+                        <p class="text-sm mb-4 opacity-90">State-of-the-art IT park with Grade A office spaces and modern infrastructure</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Tech Park</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Grade A</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Smart Building</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg bg-white">
+                    <div class="absolute top-6 right-6 z-10">
+                        <span class="bg-orange-500 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md">
+                            Launching 2027
+                        </span>
+                    </div>
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" class="project-img w-full h-full object-cover" alt="Azure Heights">
+                    </div>
+                    <div class="project-overlay text-white">
+                        <h3 class="text-2xl font-bold mb-2">Azure Heights</h3>
+                        <p class="text-sm mb-3 opacity-90">Dhanmondi, Dhaka</p>
+                        <p class="text-sm mb-4 opacity-90">Boutique residential tower with 32 ultra-luxury apartments and concierge services</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Luxury Residential</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">32 Units</span>
+                            <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs">Concierge Service</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="#contact" class="inline-block bg-[#4A5F7F] text-white px-10 py-4 rounded-full hover:bg-[#2C3E56] transition-all duration-300 font-medium shadow-lg hover:shadow-xl">
+                Discuss Your Project With Us
+            </a>
+        </div>
+    </div>
+</section>
 
     <!-- Services Section -->
     <section id="services" class="py-24 bg-gray-50">
@@ -924,7 +1111,7 @@
                                 <div class="w-12 h-12 bg-[#4A5F7F] rounded-lg flex items-center justify-center text-white mr-4 flex-shrink-0">✉️</div>
                                 <div>
                                     <h4 class="font-semibold mb-1">Email</h4>
-                                    <p class="text-gray-600 text-sm">abdurrazzakdhali2@gmail.com</p>
+                                    <p class="text-gray-600 text-sm">info@ekramdevelopersltd.com</p>
                                 </div>
                             </div>
                             
@@ -954,8 +1141,8 @@
                 <!-- Company Info -->
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-10 h-10 bg-white rounded flex items-center justify-center p-1">
-                            <img src="./images/logo.png" alt="Ekram Developer Ltd Logo" class="w-full h-full object-contain">
+                        <div class="w-12 h-12 bg-white rounded flex items-center justify-center">
+                            <img src="./images/lg.jpg" alt="Ekram Developer Ltd Logo" class="w-full h-full object-contain">
                         </div>
                         <span class="text-2xl font-bold text-white">Ekram Developer Ltd</span>
                     </div>
@@ -1042,6 +1229,24 @@
                 header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.05)';
             }
         });
+
+         function showProjects(category) {
+            // Hide all categories
+            document.querySelectorAll('.project-category').forEach(cat => {
+                cat.classList.add('hidden');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.project-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected category
+            document.getElementById('projects-' + category).classList.remove('hidden');
+            
+            // Add active class to clicked button
+            document.getElementById('btn-' + category).classList.add('active');
+        }
     </script>
 
 </body>
