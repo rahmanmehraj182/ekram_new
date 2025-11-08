@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AlFalah Tower | Ekram Developer Ltd</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <link rel="stylesheet" href="./style.css" />
+
+    <style>
+      /* Style for the project gallery swiper */
+      .project-gallery-swiper {
+        width: 100%;
+        height: 550px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 48px;
+      }
+      .project-gallery-swiper .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .project-gallery-swiper .swiper-button-next,
+      .project-gallery-swiper .swiper-button-prev {
+        color: var(--color-accent);
+      }
+      .project-gallery-swiper .swiper-pagination-bullet-active {
+        background: var(--color-accent);
+      }
+
+      /* Simple stat boxes */
+      .stat-box {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+      }
+      .stat-box-title {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .stat-box-value {
+        font-size: 28px;
+        font-weight: 700;
+        font-family: "Playfair Display", serif;
+        color: var(--color-accent);
+        line-height: 1.2;
+      }
+
+      /* Floor plan image container */
+      .floor-plan-grid {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+      .floor-plan-grid.active {
+        display: block;
+      }
+      .floor-plan-grid img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      /* Amenities list */
+      .amenities-list {
+        list-style: none;
+        padding-left: 0;
+      }
+      .amenities-list li {
+        position: relative;
+        padding-left: 32px; /* Space for the check icon */
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
+        margin-bottom: 12px;
+      }
+      .amenities-list li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--color-accent);
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .amenity-category-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #fff;
+        font-family: "Playfair Display", serif;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+  
+    <header class="fixed w-full z-50">
+        <div class="glass-effect">
+            <div class="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 py-4 h-full">
+                <a href="index.html" class="flex items-center space-x-2 min-w-0"> <div
+                        class="w-12 h-12 bg-white rounded flex items-center justify-center border border-gray-200 flex-shrink-0">
+                        <svg class="w-8 h-8 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H20V6H4V4Z" fill="currentColor" />
+                            <path d="M4 18H20V20H4V18Z" fill="currentColor" />
+                            <path d="M4 11H12V13H4V11Z" fill="currentColor" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M4 8H20V9H4V8ZM14 10H20V16H14V10ZM16 12H18V14H16V12Z" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <span class="text-xl sm:text-2xl font-bold gradient-text min-w-0 truncate">Ekram Developer
+                        Ltd</span>
+                </a>
+
+                <nav class="hidden lg:flex items-center space-x-10 text-sm font-medium">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                    <a href="index.html#about" class="nav-link">About</a>
+                    <a href="index.html#projects" class="nav-link">Projects</a>
+                    <a href="index.html#services" class="nav-link">Services</a>
+                    <a href="index.html#testimonials" class="nav-link">Testimonials</a>
+                    <a href="index.html#contact"
+                        class="bg-[var(--color-accent)] text-white px-6 py-2 rounded-full hover:bg-[var(--color-accent-dark)] transition font-medium">Contact</a>
+                </nav>
+
+                <button class="lg:hidden text-2xl text-white" onclick="toggleMenu()">
+                    ☰
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-full h-full lg:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+            <button class="absolute top-6 right-6 text-3xl text-white" onclick="toggleMenu()">
+                ×
+            </button>
+            <a href="index.html#home" onclick="toggleMenu()" class="hover:text-[var(--color-accent)]">Home</a>
+            <a href="index.html#about" onclick="toggleMenu()" class="hover:text-[var(--color-accent)]">About</a>
+            <a href="index.html#projects" onclick="toggleMenu()" class="hover:text-[var(--color-accent)]">Projects</a>
+            <a href="index.html#services" onclick="toggleMenu()" class="hover:text-[var(--color-accent)]">Services</a>
+            <a href="index.html#testimonials" onclick="toggleMenu()" class="hover:text-[var(--color-accent)]">Testimonials</a>
+            <a href="index.html#contact" onclick="toggleMenu()"
+                class="bg-[var(--color-accent)] text-white px-8 py-3 rounded-full">Contact</a>
+        </div>
+    </div>
+
+
+    <main>
+      <section class="pt-32 pb-16 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="section-header text-center mb-12">
+            <div class="section-pretitle">Project Details</div>
+            <h1 class="section-title">AlFalah Tower</h1>
+            <p class="section-description">
+              Kadamtola Wasa Road, Sabujbagh, Dhaka-1214
+            </p>
+          </div>
+
+          <div class="swiper project-gallery-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="./images/wp0.jpeg" alt="AlFalah Tower Perspective View" />
+              </div>
+              <div class="swiper-slide">
+                <img src="./images/wp1.jpeg" alt="AlFalah Tower Front View" />
+              </div>
+              <div class="swiper-slide">
+                <img src="./images/wp3.jpeg" alt="Rooftop View" />
+              </div>
+              <div class="swiper-slide">
+                <img src="./images/intr.jpeg" alt="West North View" />
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+            <div class="stat-box">
+              <div class="stat-box-title">Apartment Size</div>
+              <div class="stat-box-value">1600 sft</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-title">Unit Type</div>
+              <div class="stat-box-value">3 Bedrooms</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-title">Flat Area</div>
+              <div class="stat-box-value">1350 sft</div>
+            </div>
+             <div class="stat-box">
+              <div class="stat-box-title">Verandas</div>
+              <div class="stat-box-value">4 Verandas</div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <section id="floor-plans" class="py-24 projects-section reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="section-header">
+            <div class="section-pretitle">Project Layout</div>
+            <h1 class="section-title">Floor Plans</h1>
+          </div>
+
+          <div class="tabs-container">
+            <div class="tabs-wrapper">
+              <button class="floor-plan-tab tab-button active" data-tab="typical-floor">Typical Floor</button>
+              <button class="floor-plan-tab tab-button" data-tab="ground-floor">Ground Floor</button>
+              <button class="floor-plan-tab tab-button" data-tab="roof-floor">Rooftop</button>
+            </div>
+          </div>
+          
+          <div>
+            <div class="floor-plan-grid active" id="typical-floor">
+              <img src="./images/room1.jpeg" alt="Typical Floor Plan (Type A & B)" />
+            </div>
+            <div class="floor-plan-grid" id="ground-floor">
+              <img src="./images/room0.jpeg" alt="Ground Floor Plan" />
+            </div>
+            <div class="floor-plan-grid" id="roof-floor">
+              <img src="./images/room2.jpeg" alt="Rooftop Floor Plan" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="py-24 bg-[#1a1a2e] reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="section-header">
+            <div class="section-pretitle">What's Inside</div>
+            <h1 class="section-title">Features & Amenities</h1>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 class="amenity-category-title">Structure & General</h3>
+              <ul class="amenities-list">
+                <li>Strong R.C.C frame structure and structural design parameters based on American Concrete Institute (ACI) and BNBC code.</li>
+                <li>Sub-soil investigation and soil composition analysis.</li>
+                <li>Building planned by qualified, experienced architects and structural engineers.</li>
+                <li>All construction materials supervised at every stage.</li>
+                <li>Heavy security gateway and spacious entrance.</li>
+                <li>Two telephone connection points (living space & master bed).</li>
+                <li>Common water meter, Gas and Electricity as per Government plan.</li>
+              </ul>
+              
+              <h3 class="amenity-category-title mt-12">Electrical & Substation</h3>
+              <ul class="amenities-list">
+                 <li>All electrical lines will be concealed.</li>
+                 <li>Imported electrical switches, socket and circuit breaker.</li>
+                 <li>Individual electrical meter and distribution box for each flat.</li>
+                 <li>Each power outlet earthing connected.</li>
+                 <li>Adequate power point/light for apartments.</li>
+                 <li>One standby generator (Honda/equivalent) for lift and common space.</li>
+                 <li>Per Unit: 3 Lights & 2 Fans.</li>
+                 <li>A/c provision in 3 rooms.</li>
+                 <li>Superior quality substation (ARK Power Ltd/Engerpac/Equivalent).</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 class="amenity-category-title">Doors, Windows & Floors</h3>
+              <ul class="amenities-list">
+                <li>Imported or locally available solid wooden decorative main entrance door.</li>
+                <li>Internal door shutters are strong/durable veneered partex.</li>
+                <li>Toilet doors are Upvc and Verandahs are thui.</li>
+                <li>Aluminum sections in all windows with good quality 5mm glass.</li>
+                <li>Homogeneous tiles (16x16) in floor and wall/tiles (12x16) up to false ceiling height (RAK, Star, Cbc, Mir, X-monica, Akij, etc.).</li>
+                <li>Glaze tiles in all floor, kitchen, stair and bathrooms.</li>
+              </ul>
+
+              <h3 class="amenity-category-title mt-12">Lift, Water & Rooftop</h3>
+              <ul class="amenities-list">
+                <li>One superior quality 8-passenger lift (Sakura, Schindler/Sanei Fuji/Giant or equivalent).</li>
+                <li>Decorative and attractive lobby in every floor.</li>
+                <li>Lift will have adequate lighting, well-finished door, cabin & intercom.</li>
+                <li>Submersible pump & Large underground and overhead water tank.</li>
+                <li>Facilities at Rooftop: Multipurpose Hall, Meeting Room, Covered Terrace, Green Space, Open Terrace, Laundry Area.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="bg-[var(--color-secondary)] text-gray-300 py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-12">
+          <div>
+            <div class="flex items-center space-x-2 mb-4">
+              <div class="w-12 h-12 bg-white rounded flex items-center justify-center p-1">
+                <svg class="w-10 h-10 text-[var(--color-primary)]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 4H20V6H4V4Z" fill="currentColor" />
+                  <path d="M4 18H20V20H4V18Z" fill="currentColor" />
+                  <path d="M4 11H12V13H4V11Z" fill="currentColor" />
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M4 8H20V9H4V8ZM14 10H20V16H14V10ZM16 12H18V14H16V12Z" fill="currentColor" />
+                </svg>
+              </div>
+              <span class="text-xl font-bold text-white min-w-0 truncate">Ekram Developer Ltd</span>
+            </div>
+            <p class="text-sm mb-4 text-gray-400">
+              Building spaces that endure. Premium construction and real estate
+              development across Bangladesh since 2011.
+            </p>
+            <div class="flex space-x-3">
+              <a href="#" class="social-icon">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
+                </svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.98v16h4.98v-8.396c0-2.008 1.12-3.134 3.015-3.134 1.89 0 2.984 1.12 2.984 3.134v8.396h4.98v-8.66c0-4.99-2.502-7.34-5.986-7.34-2.734 0-4.118 1.52-4.98 2.69v-2.32h-4.98v16z"></path>
+                </svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.227-1.669 4.771-4.919 4.919-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.646-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.669-4.771 4.919-4.919 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.059 1.689.073 4.948.073s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"></path>
+                </svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer-title">Quick Links</h4>
+            <ul class="footer-list">
+              <li><a href="index.html#about" class="footer-link">About Us</a></li>
+              <li><a href="index.html#projects" class="footer-link">Our Projects</a></li>
+              <li><a href="index.html#services" class="footer-link">Services</a></li>
+              <li><a href="index.html#testimonials" class="footer-link">Testimonials</a></li>
+              <li><a href="index.html#contact" class="footer-link">Contact Us</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-title">Our Services</h4>
+            <ul class="footer-list">
+              <li><a href="index.html#services" class="footer-link">Design & Build</a></li>
+              <li><a href="index.html#services" class="footer-link">Project Management</a></li>
+              <li><a href="index.html#services" class="footer-link">Interior Development</a></li>
+              <li><a href="index.html#services" class="footer-link">Renovation</a></li>
+              <li><a href="index.html#services" class="footer-link">Property Development</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-title">Stay Updated</h4>
+            <p class="text-sm mb-4 text-gray-400">
+              Subscribe to our newsletter for latest projects and updates.
+            </p>
+            <form class="flex flex-col space-y-2">
+              <input type="email" placeholder="Your email" class="footer-input" />
+              <button type="submit" class="bg-[var(--color-accent)] text-white py-2.5 rounded-lg hover:bg-[var(--color-accent-dark)] transition text-sm font-medium">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="border-t border-gray-700/50 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
+          <p class="text-gray-400">
+            © 2025 Ekram Developer Ltd. All Rights Reserved.
+          </p>
+          <div class="flex space-x-6 mt-4 md:mt-0">
+            <a href="#" class="text-gray-400 hover:text-[var(--color-accent)] transition">Privacy Policy</a>
+            <a href="#" class="text-gray-400 hover:text-[var(--color-accent)] transition">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    
+    <script>
+      // Mobile Menu Toggle
+      function toggleMenu() {
+        const menu = document.getElementById("mobileMenu");
+        menu.classList.toggle("active");
+      }
+
+      // Smooth Scroll for page anchors
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          
+          // Check if it's a link to another page
+          if(targetId.startsWith("index.html")) {
+            window.location.href = targetId;
+            return;
+          }
+          
+          const target = document.querySelector(targetId);
+
+          if (target) {
+            if (this.closest("#mobileMenu")) {
+              toggleMenu();
+            }
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+      
+      // Handle links from other pages
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+      });
+
+      // Header Scroll Effect
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector("header");
+        if (window.scrollY > 50) {
+          header.querySelector(".glass-effect").style.background =
+            "rgba(10, 10, 20, 0.85)";
+          header.querySelector(".glass-effect").style.boxShadow =
+            "0 4px 12px rgba(0, 0, 0, 0.1)";
+        } else {
+          header.querySelector(".glass-effect").style.background =
+            "rgba(10, 10, 20, 0.7)";
+          header.querySelector(".glass-effect").style.boxShadow = "none";
+        }
+      });
+
+      // Reveal on Scroll
+      document.addEventListener("DOMContentLoaded", () => {
+        const revealElements = document.querySelectorAll(".reveal");
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                const progressBars =
+                  entry.target.querySelectorAll(".progress-bar-fill");
+                progressBars.forEach((bar) => {
+                  const targetWidth = bar.getAttribute("data-width");
+                  if (targetWidth) {
+                    bar.style.width = targetWidth;
+                  }
+                });
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+        revealElements.forEach((el) => {
+          revealObserver.observe(el);
+        });
+      });
+    </script>
+
+    <script type="module">
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      
+      const imageSwiper = new Swiper(".hero-image-swiper", {
+        direction: "vertical",
+        loop: true,
+        allowTouchMove: false,
+        effect: prefersReducedMotion ? "fade" : "coverflow",
+        coverflowEffect: {
+          rotate: 20,
+          stretch: 0,
+          depth: 200,
+          modifier: 1,
+          slideShadows: false,
+        },
+        speed: 1000,
+        fadeEffect: {
+          crossFade: true,
+        },
+      });
+
+      const textSwiper = new Swiper(".hero-text-swiper", {
+        direction: "vertical",
+        loop: true,
+        speed: 1000,
+        autoplay: prefersReducedMotion
+          ? false
+          : {
+              delay: 5000,
+              disableOnInteraction: false,
+            },
+        navigation: {
+          nextEl: ".hero-next",
+          prevEl: ".hero-prev",
+        },
+        pagination: {
+          el: ".swiper-pagination-premium",
+          type: "fraction",
+          formatFractionCurrent: (number) => ("0" + number).slice(-2),
+          formatFractionTotal: (number) => ("0" + number).slice(-2),
+          renderFraction: function (currentClass, totalClass) {
+            return (
+              '<span class="' +
+              currentClass +
+              '"></span>' +
+              " / " +
+              '<span class="' +
+              totalClass +
+              '"></span>'
+            );
+          },
+        },
+        controller: {
+          control: imageSwiper,
+        },
+        allowTouchMove: !prefersReducedMotion,
+        mousewheel: !prefersReducedMotion,
+      });
+    </script>
+
+    <script type="module">
+      // --- Initialize Project Gallery Swiper ---
+      const projectGallerySwiper = new Swiper(".project-gallery-swiper", {
+        loop: true,
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true
+        },
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+      
+      // --- Initialize Testimonial Swiper ---
+      const testimonialSwiper = new Swiper(".testimonial-swiper", {
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 30,
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        },
+      });
+    </script>
+    
+    <script>
+      // --- Floor Plan Tab Script ---
+      const floorPlanTabs = document.querySelectorAll(".floor-plan-tab");
+      const floorPlanGrids = document.querySelectorAll(".floor-plan-grid");
+
+      floorPlanTabs.forEach((button) => {
+        button.addEventListener("click", () => {
+          floorPlanTabs.forEach((btn) => btn.classList.remove("active"));
+          floorPlanGrids.forEach((grid) => grid.classList.remove("active"));
+
+          button.classList.add("active");
+          const tabName = button.getAttribute("data-tab");
+          document.getElementById(tabName).classList.add("active");
+        });
+      });
+    </script>
+
+  </body>
+</html>
